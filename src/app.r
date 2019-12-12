@@ -41,12 +41,15 @@ APP$layout(
       htmlLabel('Select State:'),
       statesDropdown,
 	  state_graph,
-      htmlIframe(height=20, width=10, style=list(borderWidth = 0)), #space
+    #   htmlIframe(height=20, width=10, style=list(borderWidth = 0)), #space
       states_graph
     #   dccMarkdown("[Data Source](https://cran.r-project.org/web/packages/gapminder/README.html)")
-    )
+    ), style = list('columnCount' = 2, 'width' = '100%')
   )
 )
+
+
+
 
 # Adding callbacks for interactivity
 APP$callback(
@@ -60,4 +63,23 @@ APP$callback(
 
 APP$run_server(port=8000, host='127.0.0.1')
 
-### App created by Kate Sedivy-Haley as part of the DSCI 532 Teaching Team
+
+
+    #   htmlDiv(
+    #     list(
+    #       htmlDiv(
+    #         list(
+    #           dccMarkdown("**Select movies to compare:**"),
+    #           moviesDropdown
+    #         ), style = list('background-color'='#afcecf', 'columnCount'=1, 'width'='20%','padding'= '10px')
+    #       ),
+    #       htmlDiv(
+    #         list(
+    #           graph3,
+    #           graph2
+    #         ), style=list('columnCount'=2, 'width'='75%')
+    #       )
+    #     ), style = list('display'='flex')#, style = list('width'="20%", 'background-color'='lightgrey')
+    #   ),
+    #   dccMarkdown("Data is from the vega dataset 'Movies'.
+    #               [Source](https://raw.githubusercontent.com/vega/vega-datasets/master/data/movies.json)")
