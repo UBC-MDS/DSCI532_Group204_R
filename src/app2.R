@@ -21,7 +21,7 @@ wine_data <- wine_data %>%
 
 #### Load necessary function
 
-source("barplot.R")
+source("barplot.r")
 
 ### Selection components ###
 
@@ -87,7 +87,7 @@ app$layout(
       xaxisDropdown,
       htmlLabel('Select Y axis'),
       yaxisDropdown,
-      bar_plot,
+      bar_plot
     )
   )
 )
