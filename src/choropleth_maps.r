@@ -3,7 +3,7 @@ library("sf")
 library("maps")
 library("rnaturalearth")
 library("rnaturalearthdata")
-library("tools")
+# library("tools")
 library("plotly")
 
 wrangle_states <- function(data) {
@@ -11,7 +11,7 @@ wrangle_states <- function(data) {
 	states <- st_as_sf(map("state", plot = FALSE, fill = TRUE))
 	
 	# Capitalize the state names
-	states$ID <- toTitleCase(states$ID)
+	states$ID <- tools::toTitleCase(states$ID)
 
 	# Add area to states
 	states$area <- as.numeric(st_area(states))
