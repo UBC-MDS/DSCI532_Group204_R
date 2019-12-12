@@ -147,7 +147,7 @@ app$layout(
                   the best wine's at the best prices in America."),
       
       htmlH3('TOTAL NUMBER OF REVIEWS'), # choropleth elements section
-      htmlH1('States'),
+      htmlH4('States'),
       htmlLabel('Select State:'),
       statesDropdown,
       state_graph,
@@ -170,7 +170,7 @@ app$layout(
       dccMarkdown("---"),
       
       htmlH3('PRICE AND RATING ANALYSIS'), # heatmap elements section
-      htmlLabel('Select x-axis metric:'),
+      htmlLabel('Select X axis'),
       xaxisDropdown_hm,
       heatmap_graph
     )
