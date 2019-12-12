@@ -7,9 +7,9 @@ library(plotly)
 library(scales)
 library(rlang)
 
-source('../src/choropleth_maps.r')
-source('../src/barplot.r')
-source('../src/heatmap.r')
+source('src/choropleth_maps.r')
+source('src/barplot.r')
+source('src/heatmap.r')
 
 
 app <- Dash$new(external_stylesheets = "https://codepen.io/chriddyp/pen/bWLwgP.css")
@@ -19,7 +19,7 @@ app <- Dash$new(external_stylesheets = "https://codepen.io/chriddyp/pen/bWLwgP.c
 #### LOAD DATA
 
 # Read in data for choropleth
-DATA <- read_csv("../data/cleaned_data.csv")
+DATA <- read_csv("data/cleaned_data.csv")
 DATA <- subset(DATA, select = -c(X1))
 
 # Wrangle the County and State data to speed up map rendering
@@ -27,13 +27,13 @@ STATE_DATA <- wrangle_states(DATA)
 COUNTY_DATA <- wrangle_counties(DATA)
 
 # Read in bar plot data.. TODO: merge with choropleth load above, replace variable references below
-wine_data <- read_csv('../data/cleaned_data.csv')
-wine_data <- wine_data %>%
-  drop_na() %>%
-  select(-X1)
+# DATA <- read_csv('data/cleaned_data.csv')
+# DATA <- DATA %>%
+#   drop_na() %>%
+#   select(-X1)
 
 # Read in pre-filetered data for heatmap
-heatmap_data <- read_csv('../data/heatmap_filtered_data.csv')
+heatmap_data <- read_csv('data/heatmap_filtered_data.csv')
 
 
 
@@ -64,7 +64,7 @@ xaxisKey_bp <- tibble(label = c("Winery", "Region", "Variety"),
 
 xaxisDropdown_bp <- dccDropdown(
   id = "x_axis_bp",
-  options = map(
+  options = lapply(
     1:nrow(xaxisKey_bp), function(i){
       list(label=xaxisKey_bp$label[i], value=xaxisKey_bp$value[i])
     }),
@@ -76,7 +76,7 @@ yaxisKey_bp <- tibble(label = c("Rating", "Price ($)", "Value"),
 
 yaxisDropdown_bp <- dccDropdown(
   id = "y_axis_bp",
-  options = map(
+  options = lapply(
     1:nrow(yaxisKey_bp), function(i){
       list(label=yaxisKey_bp$label[i], value=yaxisKey_bp$value[i])
     }),
@@ -89,7 +89,7 @@ xaxisKey_hm <- tibble(label = c("Price", "Rating"),
 
 xaxisDropdown_hm <- dccDropdown(
   id = 'x-axis_hm',
-  options = map(
+  options = lapply(
     1:nrow(xaxisKey_hm), 
     function(i){list(label=xaxisKey_hm$label[i], value=xaxisKey_hm$value[i])}
   ),
@@ -113,7 +113,7 @@ state_graph <- dccGraph(
 
 bar_plot <- dccGraph(
   id = "bar_chart",
-  figure = bar_plot1()
+  figure = bar_plot1(DATA)
 )
 
 heatmap_graph <- dccGraph(
@@ -194,11 +194,11 @@ app$callback(
 # Barplot callback
 app$callback(
   output=list(id='bar_chart', property='figure'),
-  params=list(input(id='x_axis', property='value'),
-              input(id='y_axis', property='value'),
+  params=list(input(id='x_axis_bp', property='value'),
+              input(id='y_axis_bp', property='value'),
               input(id='desc_radiobutton', property='value')),
   function(x_value, y_value, desc_value) {
-    bar_plot1(x_value, y_value, desc = desc_value)
+    bar_plot1(DATA, x_value, y_value, desc = desc_value)
   }
 )
 
