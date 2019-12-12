@@ -3,23 +3,14 @@ library(tidyverse)
 library(plotly)
 
 # Function to make the heatmap
-make_heatmap <- function(xaxis="price"){
+plot_heatmap <- function(xaxis="price"){
   
-  # Selection component for heatmap
-  xaxisKey <- tibble(label = c("Price", "Rating"),
+  # Selection components for heatmap
+  xaxisKey_hm <- tibble(label = c("Price", "Rating"),
                      value = c("price", "points"))
   
-  xaxisDropdown <- dccDropdown(
-    id = 'x-axis',
-    options = map(
-      1:nrow(xaxisKey), 
-      function(i){list(label=xaxisKey$label[i], value=xaxisKey$value[i])}
-    ),
-    value = "price"
-  )
-  
   # gets the label matching the column value
-  x_label <- xaxisKey$label[xaxisKey$value==xaxis]
+  x_label <- xaxisKey_hm$label[xaxisKey_hm$value==xaxis]
   
   # make the plot!
   if (xaxis == 'price'){

@@ -17,13 +17,13 @@ bar_plot1 <- function(x_name="winery", y_name="points", desc=TRUE) {
   print(identity(n))
   
   # Specifying axes titles here
-  xaxisKey <- tibble(label = c("Winery", "Region", "Variety"),
+  xaxisKey_bp <- tibble(label = c("Winery", "Region", "Variety"),
                      value = c("winery", "region_1", "variety"))
-  x_title <- xaxisKey$label[xaxisKey$value == cement(!!x_name)]
+  x_title <- xaxisKey_bp$label[xaxisKey_bp$value == cement(!!x_name)]
   
-  yaxisKey <- tibble(label = c("Rating", "Price ($)", "Value"),
+  yaxisKey_bp <- tibble(label = c("Rating", "Price ($)", "Value"),
                      value = c("points", "price", "value_scaled"))
-  y_title <- yaxisKey$label[yaxisKey$value == cement(!!y_name)]
+  y_title <- yaxisKey_bp$label[yaxisKey_bp$value == cement(!!y_name)]
   
   # If the user specifies Highest to Lowest, use this plot
   if (desc==TRUE) {
@@ -77,7 +77,5 @@ bar_plot1 <- function(x_name="winery", y_name="points", desc=TRUE) {
             panel.grid.major = element_blank())
     
     ggplotly(new_plot, tooltip="")
-    
   }
-  
 }
