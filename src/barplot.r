@@ -1,3 +1,8 @@
+library(ggplot2)
+library(tidyverse)
+library(rlang)
+library(plotly)
+
 # Taken from Hadley Wickam Advanced R
 cement <- function(...) {
   args <- ensyms(...)
