@@ -8,12 +8,6 @@ library("tools")
 library("RColorBrewer")
 library("plotly")
 
-# # Read in the Wine Data
-# data <- read_csv("data/cleaned_data.csv")
-# data <- subset(data, select = -c(X1))
-
-print("PRINTING IN CHOROPLETH")
-
 wrangle_states <- function(data) {
 	# Get the states mapping data
 	states <- st_as_sf(map("state", plot = FALSE, fill = TRUE))
@@ -65,8 +59,8 @@ wrangle_counties <- function(data) {
 	county_data <- county_data[, c(6, 1, 2, 3, 4, 5)]
 }
 
-plot_states <- function(data) {
-	states_data <- wrangle_states(data)
+plot_states <- function(data, states_data) {
+	# states_data <- wrangle_states(data)
 	wine_colors <- c('#C7DBEA', '#CCCCFF', '#C1BDF4',
                      '#B6AEE9', '#948EC0', '#8475B2',
                      '#735BA4', '#624296', '#512888')
@@ -88,12 +82,11 @@ plot_states <- function(data) {
 	    style(hoveron = "fill")
 }
 
-plot_state <- function(data, state_value) {
+plot_state <- function(data, state_value, county_data) {
 	state_value <- tolower(state_value)
-	county_data <- wrangle_counties(data)
-	print(state_value)
+	# county_data <- wrangle_counties(data)
 	california <- county_data %>%
-	    filter(grepl(state_value, ID))
+	    filter(grepl(paste0(state_value, ','), ID))
 
 	wine_colors <- c('#C7DBEA', '#CCCCFF', '#C1BDF4',
 	                 '#B6AEE9', '#948EC0', '#8475B2',
