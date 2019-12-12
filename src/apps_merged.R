@@ -26,26 +26,18 @@ DATA <- subset(DATA, select = -c(X1))
 STATE_DATA <- wrangle_states(DATA)
 COUNTY_DATA <- wrangle_counties(DATA)
 
-# Read in bar plot data.. TODO: merge with choropleth load above, replace variable references below
-# DATA <- read_csv('data/cleaned_data.csv')
-# DATA <- DATA %>%
-#   drop_na() %>%
-#   select(-X1)
-
 # Read in pre-filetered data for heatmap
 heatmap_data <- read_csv('data/heatmap_filtered_data.csv')
-
-
 
 ### INTERACTIVE ELEMENTS
 
 # Choropleth state selection 
 statesDropdown <- dccDropdown(
-  id = "state_choropleth",
-  options = lapply(unique(DATA$state), function(x){
-    list(label=x, value=x)
-  }),
-  value = "California" # Default Value
+ id = "state_choropleth",
+ options = lapply(unique(DATA$state), function(x){
+   list(label=x, value=x)
+ }),
+ value = "California" # Default Value
 )
 
 # Bar plot order radio buttons
@@ -102,13 +94,13 @@ xaxisDropdown_hm <- dccDropdown(
 
 # Call functions to create each plot
 states_graph <- dccGraph(
-  id = 'states_graph',
-  figure = plot_states(DATA, STATE_DATA)
+ id = 'states_graph',
+ figure = plot_states(DATA, STATE_DATA)
 )
 
 state_graph <- dccGraph(
-  id = 'state_graph',
-  figure = plot_state(DATA, 'california', COUNTY_DATA)
+ id = 'state_graph',
+ figure = plot_state(DATA, 'california', COUNTY_DATA)
 )
 
 bar_plot <- dccGraph(
@@ -117,8 +109,8 @@ bar_plot <- dccGraph(
 )
 
 heatmap_graph <- dccGraph(
-  id = 'heatmap_graph',
-  figure = plot_heatmap()
+ id = 'heatmap_graph',
+ figure = plot_heatmap()
 )
 
 
@@ -130,21 +122,21 @@ app$layout(
       htmlH1('V IS FOR VINO'), # Title and app description
       htmlH3('Explore the best wines the United States has to offer using our interactive dashboard'),
       dccMarkdown("This app allows you visualize details of over 50,000 wine reviews from across the \
-                  United States, using data scraped from Wine Enthusiast on November 22nd, 2017. \
-                  Given the data source, the wines tend to be of relatively high quality, with \
-                  each receiving a rating score between 80 and 100. We’ve used these ratings to \
-                  assign a ‘value’ score to each wine, which is essentially a ratio of its rating \
-                  to price. Each review also contains details such as grape variety, winery, region, \
-                  county, and state."),
+                 United States, using data scraped from Wine Enthusiast on November 22nd, 2017. \
+                 Given the data source, the wines tend to be of relatively high quality, with \
+                 each receiving a rating score between 80 and 100. We’ve used these ratings to \
+                 assign a ‘value’ score to each wine, which is essentially a ratio of its rating \
+                 to price. Each review also contains details such as grape variety, winery, region, \
+                 county, and state."),
       dccMarkdown("---"),
       
       htmlH2('WINE REVIEWS BY GEOGRAPHIC LOCATION'), # Geographic title and description
       dccMarkdown("See how wine is distributed across the U.S. Hover over a particular state or \
-                  county to see some summary information for things like average price, points, \
-                  or value rating. Use the dropdown menu to take a closer look at a particular \
-                  state, where you can see a breakdown by county. Hover over a county to get more \
-                  summary information. In no time at all you'll be an expert on where you can find \
-                  the best wine's at the best prices in America."),
+                 county to see some summary information for things like average price, points, \
+                 or value rating. Use the dropdown menu to take a closer look at a particular \
+                 state, where you can see a breakdown by county. Hover over a county to get more \
+                 summary information. In no time at all you'll be an expert on where you can find \
+                 the best wine's at the best prices in America."),
       
       htmlH3('TOTAL NUMBER OF REVIEWS'), # choropleth elements section
       htmlH4('States'),
@@ -156,9 +148,9 @@ app$layout(
       
       htmlH2('WINE FEATURE COMPARISONS'), # header and description for barchart and heatmap sections
       dccMarkdown("These interactive graphs allow you to explore the price, rating and value for \
-                  different wineries, grape varieties, and regions. The bar chart shows dynamically \
-                  ranked results for calculated averages, while the heat map shows the distribution \
-                  of value (scaled rating / dollar) for popular grape varieties."),
+                 different wineries, grape varieties, and regions. The bar chart shows dynamically \
+                 ranked results for calculated averages, while the heat map shows the distribution \
+                 of value (scaled rating / dollar) for popular grape varieties."),
       
       htmlH3('WINE RANKINGS'), # barchart elements section
       descButton,
@@ -181,15 +173,15 @@ app$layout(
 
 ### CALLBACKS
 
-# Choropleth callback
+Choropleth callback
 app$callback(
-  # update figure of states_graph
-  output=list(id = 'state_graph', property='figure'),
-  params=list(input(id = 'state_choropleth', property='value')),
-  # this translates your list of params into function arguments
-  function(state_value) {
-    plot_state(DATA, state_value, COUNTY_DATA)
-  })
+  #update figure of states_graph
+ output=list(id = 'state_graph', property='figure'),
+ params=list(input(id = 'state_choropleth', property='value')),
+  #this translates your list of params into function arguments
+ function(state_value) {
+   plot_state(DATA, state_value, COUNTY_DATA)
+ })
 
 # Barplot callback
 app$callback(
@@ -205,11 +197,11 @@ app$callback(
 # Heatmap callback
 app$callback(
   #update figure of heatmap_graph
-  output=list(id = 'heatmap_graph', property = 'figure'),
+ output=list(id = 'heatmap_graph', property = 'figure'),
   #based on value of x-axis component
-  params=list(input(id = 'x-axis', property = 'value')),
-  function(xaxis_value) {
-    make_heatmap(xaxis_value)
-  })
+ params=list(input(id = 'x-axis', property = 'value')),
+ function(xaxis_value) {
+   make_heatmap(xaxis_value)
+ })
 
 app$run_server(port=8000, host='127.0.0.1')
