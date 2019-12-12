@@ -10,7 +10,7 @@ cement <- function(...) {
 }
 
 # Function to make the bar plot
-bar_plot1 <- function(x_name="winery", y_name="points", desc=TRUE) {
+bar_plot1 <- function(wine_data, x_name="winery", y_name="points", desc=TRUE) {
   # Unquoting variables to use with dplyr functions
   x_name <- sym(x_name)
   y_name <- sym(y_name)
