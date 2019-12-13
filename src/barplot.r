@@ -49,8 +49,7 @@ bar_plot1 <- function(wine_data, x_name="winery", y_name="points", desc=TRUE) {
       theme_bw() +
       theme(axis.text.x = element_text(angle=60, hjust=1),
             legend.position = 'none',
-            panel.grid.major = element_blank(),
-            axis.title.x = theme_text(vjust=-0.5))
+            panel.grid.major = element_blank())
     
     ggplotly(new_plot, tooltip="")
     
@@ -75,8 +74,7 @@ bar_plot1 <- function(wine_data, x_name="winery", y_name="points", desc=TRUE) {
       theme_bw() +
       theme(axis.text.x = element_text(angle=60, hjust=1),
             legend.position = 'none',
-            panel.grid.major = element_blank(),
-            axis.title.x = theme_text(vjust=-0.5))
+            panel.grid.major = element_blank())
     
     ggplotly(new_plot, tooltip="")
   }
