@@ -20,12 +20,8 @@ The ‘Wine Feature Comparisons’ section allows users to explore the price, ra
 
 #### Geographic View - Choropleth Maps
 
- ![Sketch]()
+ ![Sketch](imgs/choropleth_maps_screenshot.png)
 
-#### Wine Feature - Barchart
+#### Wine Features - Barchart & Heatmap
 
-![Sketch]()
-
-#### Wine Feature - Heatmap
-
-![Sketch]()
+![Sketch](imgs/barplot_heatmap_screenshot.png)
