@@ -1,19 +1,17 @@
 library("ggplot2")
 library("sf")
-library("tidyverse")
 library("maps")
 library("rnaturalearth")
 library("rnaturalearthdata")
-library("tools")
-library("RColorBrewer")
 library("plotly")
+library("tidyr")
 
 wrangle_states <- function(data) {
 	# Get the states mapping data
 	states <- st_as_sf(map("state", plot = FALSE, fill = TRUE))
 	
 	# Capitalize the state names
-	states$ID <- toTitleCase(states$ID)
+	states$ID <- tools::toTitleCase(states$ID)
 
 	# Add area to states
 	states$area <- as.numeric(st_area(states))
@@ -22,6 +20,7 @@ wrangle_states <- function(data) {
 	states_data <- rename(data, ID = state)
 	states_data <- left_join(states_data, states, by = c("ID" = "ID"))
 	
+	# Group the data together to get it in it's final form
 	states_data <- states_data %>%
 	    group_by(ID) %>%
 	    drop_na(price) %>%
@@ -37,16 +36,20 @@ wrangle_states <- function(data) {
 }
 
 wrangle_counties <- function(data) {
-	# Get the mapping data
+	# Get the county mapping data (geometries)
 	counties <- st_as_sf(map("county", plot=FALSE, fill=TRUE))
 
+	# Configure the wine data so I can match Geometry's
 	county_data <- data
 	county_data$state <- lapply(county_data$state, function(x) str_to_lower(x))
 	county_data$county <- lapply(county_data$county, function(x) str_to_lower(x))
 	county_data <- unite(county_data, ID, c('state', 'county'), sep=',', remove = FALSE)
+	
+	# Join the Geometry data to the wine data
 	county_data <- county_data %>%
 	    mutate(ID = gsub(' county', "", ID))
 
+	# Group the data together to get it in it's final form
 	county_data <- county_data %>%
 	    group_by(ID) %>%
 	    drop_na(price) %>%
@@ -60,7 +63,8 @@ wrangle_counties <- function(data) {
 }
 
 plot_states <- function(data, states_data) {
-	# states_data <- wrangle_states(data)
+	
+	# Set the gradient color scheme
 	wine_colors <- c('#C7DBEA', '#CCCCFF', '#C1BDF4',
                      '#B6AEE9', '#948EC0', '#8475B2',
                      '#735BA4', '#624296', '#512888')
@@ -83,11 +87,12 @@ plot_states <- function(data, states_data) {
 }
 
 plot_state <- function(data, state_value, county_data) {
+	# Select the state to display from the input value
 	state_value <- tolower(state_value)
-	# county_data <- wrangle_counties(data)
 	california <- county_data %>%
 	    filter(grepl(paste0(state_value, ','), ID))
 
+	# Set the gradient color scheme
 	wine_colors <- c('#C7DBEA', '#CCCCFF', '#C1BDF4',
 	                 '#B6AEE9', '#948EC0', '#8475B2',
 	                 '#735BA4', '#624296', '#512888')
