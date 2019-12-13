@@ -12,20 +12,16 @@ library(rlang)
 library(dplyr)
 library(purrr)
 
-print(getwd())
-
-source('app/src/choropleth_maps.r')
-source('app/src/barplot.r')
-source('app/src/heatmap.r')
+source('src/choropleth_maps.r')
+source('src/barplot.r')
+source('src/heatmap.r')
 
 app <- Dash$new(external_stylesheets = "https://codepen.io/chriddyp/pen/bWLwgP.css")
 
 #### LOAD DATA
 
 # Read in data for choropleth
-# DATA <- read_csv("https://github.com/UBC-MDS/DSCI532_Group204_R/blob/master/data/cleaned_data.csv") %>%
-#   select(-X1)
-DATA <- read_csv("app/data/cleaned_data.csv") %>%
+DATA <- read_csv("data/cleaned_data.csv") %>%
 	select(-X1)
 
 # Wrangle the County and State data to speed up map rendering
@@ -33,8 +29,7 @@ STATE_DATA <- wrangle_states(DATA)
 COUNTY_DATA <- wrangle_counties(DATA)
 
 # Read in pre-filetered data for heatmap
-# heatmap_data <- read_csv('https://github.com/UBC-MDS/DSCI532_Group204_R/blob/master/data/heatmap_filtered_data.csv')
-heatmap_data <- read_csv('app/data/heatmap_filtered_data.csv')
+heatmap_data <- read_csv('data/heatmap_filtered_data.csv')
 
 ### INTERACTIVE ELEMENTS
 
@@ -95,8 +90,6 @@ xaxisDropdown_hm <- dccDropdown(
   value = "price"
 )
 
-
-
 # CREATE PLOTS
 
 # Call functions to create each plot
@@ -119,7 +112,6 @@ heatmap_graph <- dccGraph(
  id = 'heatmap_graph',
  figure = plot_heatmap()
 )
-
 
 ### DEFINE APP LAYOUT
 

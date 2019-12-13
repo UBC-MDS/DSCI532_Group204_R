@@ -109,6 +109,6 @@ plot_state <- function(data, state_value, county_data) {
 	    theme_void() +
 	    labs(title = "Number of Wine Reviews by State",
 	         fill = 'Num Reviews')
-	ggplotly(state, width = 450, hoverinfo = "Num Reviews") %>%
+	ggplotly(state, width = 750, hoverinfo = "Num Reviews") %>%
 	    style(hoveron = "fill")
 }
