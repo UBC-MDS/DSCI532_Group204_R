@@ -206,9 +206,9 @@ app$callback(
   #update figure of heatmap_graph
  output=list(id = 'heatmap_graph', property = 'figure'),
   #based on value of x-axis component
- params=list(input(id = 'x-axis', property = 'value')),
+ params=list(input(id = 'x-axis_hm', property = 'value')),
  function(xaxis_value) {
-   make_heatmap(xaxis_value)
+   plot_heatmap(xaxis_value)
  })
 
 app$run_server(host = "0.0.0.0", port = Sys.getenv('PORT', 8050))
