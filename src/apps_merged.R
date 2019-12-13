@@ -17,8 +17,9 @@ app <- Dash$new(external_stylesheets = "https://codepen.io/chriddyp/pen/bWLwgP.c
 #### LOAD DATA
 
 # Read in data for choropleth
-DATA <- read_csv("data/cleaned_data.csv")
-DATA <- subset(DATA, select = -c(X1))
+DATA <- read_csv("data/cleaned_data.csv") %>%
+  select(-X1)
+#DATA <- subset(DATA, select = -c(X1))
 
 # Wrangle the County and State data to speed up map rendering
 STATE_DATA <- wrangle_states(DATA)
@@ -171,7 +172,7 @@ app$layout(
 
 ### CALLBACKS
 
-Choropleth callback
+#Choropleth callback
 app$callback(
   #update figure of states_graph
  output=list(id = 'state_graph', property='figure'),
