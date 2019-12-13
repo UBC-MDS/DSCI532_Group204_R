@@ -21,7 +21,6 @@ app <- Dash$new(external_stylesheets = "https://codepen.io/chriddyp/pen/bWLwgP.c
 # Read in data for choropleth
 DATA <- read_csv("data/cleaned_data.csv") %>%
   select(-X1)
-#DATA <- subset(DATA, select = -c(X1))
 
 # Wrangle the County and State data to speed up map rendering
 STATE_DATA <- wrangle_states(DATA)
@@ -106,7 +105,8 @@ state_graph <- dccGraph(
 
 bar_plot <- dccGraph(
   id = "bar_chart",
-  figure = bar_plot1(DATA)
+  figure = bar_plot1(DATA),
+  style(bar_plot1(DATA), height=800) 
 )
 
 heatmap_graph <- dccGraph(
