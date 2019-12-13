@@ -193,7 +193,7 @@ app$callback(
               input(id='y_axis_bp', property='value'),
               input(id='desc_radiobutton', property='value')),
   function(x_value, y_value, desc_value) {
-    bar_plot1(DATA, x_value, y_value, desc = desc_value)
+    bar_plot1(DATA, x_value, y_value, desc_value)
   }
 )
 
@@ -207,5 +207,5 @@ app$callback(
    make_heatmap(xaxis_value)
  })
 
-#app$run_server(port=8000, host='127.0.0.1')
-app$run_server(host = "0.0.0.0", port = Sys.getenv('PORT', 8050))
+app$run_server(port=8000, host='127.0.0.1')
+#app$run_server(host = "0.0.0.0", port = Sys.getenv('PORT', 8050))
