@@ -108,8 +108,7 @@ state_graph <- dccGraph(
 
 bar_plot <- dccGraph(
   id = "bar_chart",
-  figure = bar_plot1(DATA),
-  style(bar_plot1(DATA), height=800) 
+  figure = bar_plot1(DATA) 
 )
 
 heatmap_graph <- dccGraph(
@@ -203,9 +202,10 @@ app$callback(
   #update figure of heatmap_graph
  output=list(id = 'heatmap_graph', property = 'figure'),
   #based on value of x-axis component
- params=list(input(id = 'x-axis', property = 'value')),
+ params=list(input(id = 'x-axis_hm', property = 'value')),
  function(xaxis_value) {
    make_heatmap(xaxis_value)
  })
 
+#app$run_server(port=8000, host='127.0.0.1')
 app$run_server(host = "0.0.0.0", port = Sys.getenv('PORT', 8050))
