@@ -30,5 +30,5 @@ plot_heatmap <- function(xaxis="price"){
       labs(x = 'Rating', y = 'Grape Variety', fill = "Average Value")
   }
   
-  ggplotly(p)
+  ggplotly(p) %>% config(displayModeBar = FALSE)
 }
