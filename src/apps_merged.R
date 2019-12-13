@@ -14,8 +14,6 @@ source('src/heatmap.r')
 
 app <- Dash$new(external_stylesheets = "https://codepen.io/chriddyp/pen/bWLwgP.css")
 
-
-
 #### LOAD DATA
 
 # Read in data for choropleth
