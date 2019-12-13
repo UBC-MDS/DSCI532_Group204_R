@@ -151,7 +151,11 @@ app$layout(
                  ranked results for calculated averages, while the heat map shows the distribution \
                  of value (scaled rating / dollar) for popular grape varieties."),
       
-      htmlH3('WINE RANKINGS'), # barchart elements section
+      htmlH3('WINE RANKINGS'),# barchart elements section
+      dccMarkdown("*Explore wines from different regions, wineries, or varieties using the `Choose X Axis` \
+                   dropdown menu. Change the number of regions, wineries, or varieties you are exploring \ 
+                   using the slider bar. Find the highest or lowest ranked wines based on rating, price, \
+                   or value using the `Choose Y Axis` dropdown menu and the `Choose the Ranking` toggle button.*"), 
       descButton,
       htmlLabel('Select X axis'),
       xaxisDropdown_bp,
