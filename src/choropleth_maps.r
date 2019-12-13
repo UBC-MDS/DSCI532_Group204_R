@@ -4,6 +4,7 @@ library("maps")
 library("rnaturalearth")
 library("rnaturalearthdata")
 library("plotly")
+library("tidyr")
 
 wrangle_states <- function(data) {
 	# Get the states mapping data
