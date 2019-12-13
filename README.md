@@ -13,14 +13,6 @@ The ‘Geographic Analysis’ tab shows how wine is distributed across the U.S. 
 The ‘Explore Rating, Price & Value of Wines’ tab allows users to explore the price, points (rating) and value for different wineries, grape varieties, and regions. The bar chart shows dynamically ranked results for calculated averages. Dropdowns allow the user to select which data to display on each axis, a slider is provided to select how many bars to display, and there is a radio button selection to choose to rank the bars in either ascending or descending order. The heat map shows the distribution of value (scaled rating / price) for popular grape varieties across either price or rating ranges, depending on the dropdown selection.
 
 
-## Original Proposal: Milestone 1
-
-The main proposal file for this project milestone can be found [here.](https://github.com/UBC-MDS/DSCI532_Group204_Vino/blob/master/proposal.md)
-
-### App Sketch & Description
-
-The app is created to allow users to explore the wine industry within the United States. It includes functionality to analyse geographic features with choropleth maps of the U.S., and functionality to analyse details about price, ratings, or value for a particular winery, region, or grape variety. The app is designed with an easy to use UI separating the views into one of two tabs to easily frame research and avoid overcluttering the browser window. A focus on user interaction and aesthetically pleasing design elements puctuated by a consistent color scheme underpin the usefulness and usability of this app. The app includes many useful hover and tooltip elements as well as interactive dropdowns, buttons and views which allow the user complete control of what they see allowing for discovery of different wine charachteristics. Future versions aim to include search features allowing users to gain insights on specific bottles of wine. The two views are summarized in the sketches below:
-
 #### Geographic View
 
 ![Sketch](imgs/updated_sketch_p1.png)
