@@ -5,6 +5,7 @@
 Due to our use of the `sf` library, we were unable to deploy our app to heroku. Refer to [this bug issue on github](https://github.com/UBC-MDS/DSCI532_Group204_R/issues/32) for details. 
 
 To run the application locally, navigate to the root of the cloned repository and execute `Rscript app.r`
+ - Note to install the required packages, you can execute our `init.R` file which will install the required files
 
 ### Summary of App Functionality
 
