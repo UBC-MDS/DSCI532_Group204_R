@@ -22,14 +22,17 @@ app <- Dash$new(external_stylesheets = "https://codepen.io/chriddyp/pen/bWLwgP.c
 #### LOAD DATA
 
 # Read in data for choropleth
+# DATA <- read_csv("https://github.com/UBC-MDS/DSCI532_Group204_R/blob/master/data/cleaned_data.csv") %>%
+#   select(-X1)
 DATA <- read_csv("data/cleaned_data.csv") %>%
-  select(-X1)
+	select(-X1)
 
 # Wrangle the County and State data to speed up map rendering
 STATE_DATA <- wrangle_states(DATA)
 COUNTY_DATA <- wrangle_counties(DATA)
 
 # Read in pre-filetered data for heatmap
+# heatmap_data <- read_csv('https://github.com/UBC-MDS/DSCI532_Group204_R/blob/master/data/heatmap_filtered_data.csv')
 heatmap_data <- read_csv('data/heatmap_filtered_data.csv')
 
 ### INTERACTIVE ELEMENTS
