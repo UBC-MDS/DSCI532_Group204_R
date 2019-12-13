@@ -32,7 +32,7 @@ bar_plot1 <- function(wine_data, x_name="winery", y_name="points", desc=TRUE) {
       group_by(!!x_name) %>%
       summarize(rating = mean(!!y_name)) %>%
       arrange(desc(rating)) %>%
-      head(20) %>%
+      slice(1:20) %>%
       mutate(highlight_flag = ifelse(rating == max(rating), T, F))
     
     # Plotting wrangled data
@@ -58,7 +58,7 @@ bar_plot1 <- function(wine_data, x_name="winery", y_name="points", desc=TRUE) {
       group_by(!!x_name) %>%
       summarize(rating = mean(!!y_name)) %>%
       arrange(rating) %>%
-      tail(20) %>%
+      slice(-20:-n()) %>%
       mutate(highlight_flag = ifelse(rating == min(rating), T, F)) 
     
     new_plot <- ggplot(new_data, aes(x=reorder(!!x_name, rating), rating,
