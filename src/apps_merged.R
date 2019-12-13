@@ -2,7 +2,7 @@ library(dash)
 library(dashCoreComponents)
 library(dashHtmlComponents)
 library(dashTable)
-library(tidyverse)
+# library(tidyverse)
 library(plotly)
 library(scales)
 library(rlang)
@@ -26,16 +26,8 @@ DATA <- subset(DATA, select = -c(X1))
 STATE_DATA <- wrangle_states(DATA)
 COUNTY_DATA <- wrangle_counties(DATA)
 
-# Read in bar plot data.. TODO: merge with choropleth load above, replace variable references below
-# DATA <- read_csv('data/cleaned_data.csv')
-# DATA <- DATA %>%
-#   drop_na() %>%
-#   select(-X1)
-
 # Read in pre-filetered data for heatmap
 heatmap_data <- read_csv('data/heatmap_filtered_data.csv')
-
-
 
 ### INTERACTIVE ELEMENTS
 

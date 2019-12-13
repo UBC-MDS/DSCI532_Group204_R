@@ -3,7 +3,6 @@ library("sf")
 library("maps")
 library("rnaturalearth")
 library("rnaturalearthdata")
-# library("tools")
 library("plotly")
 
 wrangle_states <- function(data) {
