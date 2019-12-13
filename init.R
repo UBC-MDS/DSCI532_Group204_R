@@ -50,6 +50,7 @@ install.packages("https://cloud.r-project.org/src/contrib/readr_1.3.1.tar.gz", t
 install.packages("https://cloud.r-project.org/src/contrib/stringr_1.4.0.tar.gz", type="source", repos=NULL)
 install.packages("https://cloud.r-project.org/src/contrib/scales_1.1.0.tar.gz", type="source", repos=NULL)
 install.packages("https://cloud.r-project.org/src/contrib/rlang_0.4.2.tar.gz", type="source", repos=NULL)
+install.packages("https://cloud.r-project.org/src/contrib/tidyr_1.0.0.tar.gz", type="source", repos=NULL)
 
 install.packages("https://cloud.r-project.org/src/contrib/sf_0.8-0.tar.gz", type="source", repos=NULL)
 install.packages("https://cloud.r-project.org/src/contrib/maps_3.3.0.tar.gz", type="source", repos=NULL)
